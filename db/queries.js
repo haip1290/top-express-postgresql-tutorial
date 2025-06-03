@@ -6,7 +6,24 @@ async function getAllUsernames() {
 }
 
 async function insertUsername(username) {
-  await pool.query("INSERT INTO (username) VALUES ($1)", [username]);
+  await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);
 }
 
-module.exports = { getAllUsernames, insertUsername };
+async function getUsernameByUsername(username) {
+  const { rows } = await pool.query(
+    "SELECT * FROM usernames WHERE username LIKE ($1)",
+    [`%${username}%`],
+  );
+  return rows;
+}
+
+async function deleteAllUsername() {
+  await pool.query("DELETE FROM usernames");
+}
+
+module.exports = {
+  getAllUsernames,
+  insertUsername,
+  getUsernameByUsername,
+  deleteAllUsername,
+};

@@ -13,6 +13,12 @@ app.use("/", usersRoute);
 
 const PORT = process.env.PORT || 3000;
 
+app.use((error, req, res, next) => {
+  console.log(error);
+
+  res.status(error.statusCode || 500).send(error.message);
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

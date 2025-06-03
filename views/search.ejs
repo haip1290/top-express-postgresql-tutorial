@@ -7,16 +7,17 @@
   </head>
   <body>
     <h1><%=title%></h1>
+    <a href="/">Home</a>
+    <a href="/new">Create User</a>
+    <form action="/search" method="get">
+      <label for="username">Username: </label>
+      <input type="text" name="username" id="username" />
+      <button type="submit">Search</button>
+    </form>
     <ul>
-      <% usernames.map((user)=>{%>
+      <%usernames.map((user)=>{%>
       <li><%=user.username%></li>
-
       <%})%>
     </ul>
-    <a href="/new">Add User</a>
-    <a href="/search">Search</a>
-    <form action="/delete" method="post" style="display: inline">
-      <button type="submit">Delete All</button>
-    </form>
   </body>
 </html>
